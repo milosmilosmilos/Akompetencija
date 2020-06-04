@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+namespace AA25
+{
+    public partial class pocetna : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string cs = WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            string upit = "SELECT * FROM Korisnici WHERE Ime=@Ime AND Sifra=@Sifra";
+            SqlCommand cmd = new SqlCommand(upit, con);
+            try {
+                con.Open();
+                cmd.Parameters.AddWithValue("Ime", TextBox1.Text);
+                cmd.Parameters.AddWithValue("Sifra", TextBox2.Text);
+                SqlDataReader r = cmd.ExecuteReader();
+                r.Read();
+                if (r["Ime"] != null) ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Dobrodošli na sajt!')", true);
+            }
+            catch
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Registracija nije uspela!')", true);
+                TextBox1.Text = "";
+                TextBox2.Text = "";
+            }
+            
+            
+        }
+    }
+}
