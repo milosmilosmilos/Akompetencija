@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace CD_katalog
+{
+    public class Album
+    {
+        private string izvodjac;
+        private string naziv;
+        private string zanr;
+        private string godina;
+        private string izdavac;
+        private string omot;
+
+        public string Izvodjac
+        {
+            get { return this.izvodjac; }
+            set { this.izvodjac = value; }
+        }
+
+        public string Naziv
+        {
+            get { return this.naziv; }
+            set { this.naziv = value; }
+        }
+
+        public string Zanr
+        {
+            get { return this.zanr; }
+            set { this.zanr = value; }
+        }
+
+        public string Godina
+        {
+            get { return this.godina; }
+            set { this.godina = value; }
+        }
+
+        public string Izdavac
+        {
+            get { return this.izdavac; }
+            set { this.izdavac = value; }
+        }
+
+        public string Omot
+        {
+            get { return this.omot; }
+            set { this.omot = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.izvodjac + " | " + this.naziv + " | " + this.zanr + " | " + this.godina + " | " + this.izdavac + " | " + this.omot;
+        }
+    }
+}
