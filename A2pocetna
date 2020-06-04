@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="stil.css">
+</head>
+<body>
+
+<a href="O autoru.html" target="_top">O autoru kliknite ovde</a></p>
+<a href="Uputstvo.html" target="_top">Uputstvo kliknite ovde</a></p>
+<div class="kontejnergalerije">
+<p align="center" id="tekst">MESEC</p>
+<img src="slike/slika1.jpg" onclick="promeni(this.id)" id="img1" alt="MESEC"class="centralna">
+<div align="center" class="cntr prelazmisa">
+<img src="slike/slika2.jpg" onclick="promeni(this.id)" id="img2" alt="PANDA" class="ostale">
+<img src="slike/slika3.jpg" onclick="promeni(this.id)" id="img3" alt="MINIONSI" class="ostale">
+<img src="slike/slika4.jpg" onclick="promeni(this.id)" id="img4" alt="BELA MACKA" class="ostale">
+<img src="slike/slika5.jpg" onclick="promeni(this.id)" id="img5" alt="CRNA MACKA SA BELIM" class="ostale">
+<img src="slike/slika6.jpg" onclick="promeni(this.id)"id="img6" alt="ZABA BROJ 1" class="ostale">
+<img src="slike/slika7.jpg" onclick="promeni(this.id)" id="img7" alt="ZABA BROJ 2" class="ostale">
+<img src="slike/slika8.jpg" onclick="promeni(this.id)" id="img8" alt="SUPERHEROJ" class="ostale">
+<img src="slike/slika9.jpg" onclick="promeni(this.id)" id="img9" alt="NEKO SAZDANJE OD PRE" class="ostale">
+<img src="slike/slika10.jpg" onclick="promeni(this.id)" id="img10" alt="ZIVA RIBA KAO HRANA" class="ostale">
+<div>
+
+</div>
+
+<script src="funkcionalnost.js">
+</script>
+</body>
+</html>
