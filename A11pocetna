@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Pocetna</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- modernizr enables HTML5 elements and feature detects -->
+  <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <header>
+      <nav>
+        <ul class="sf-menu" id="nav">
+          <li class="selected">Pocetna</li>
+          <li><a href="OAutoru.html">OAutoru</a></li>
+          <li><a href="Uputstvo.html">Uputstvo</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+	    <div id="site_content">
+      <div class="content">
+        <form action="JavaScript:izracunaj()">
+		  <label for="ime1">Ime osobe1:</label>
+		  <label for="ime2" class="desno">Ime osobe2:</label><br>
+		  <input type="text" id="ime1" name="ime">
+		  <input type="text" id="ime2" name="ime" class="desno">
+		  <br>
+		  <p id="procenat" style="text-align:center">Procenat slaganja</p>
+		  <label for="datum1">Datum rodjenja osobe1:</label>
+		  <label for="datum2" class="desno">Datum rodjenja osobe2:</label><br>
+		  <input type="date" id="datum1" name="datum">
+		  <input type="date" id="datum2" name="datum" class="desno"><br><br>
+		  <input type="submit" value="Izracunaj" id="dugme">
+		</form>
+		<br>
+		<img src="images/cvet.png" alt="cvet1" class="cvet"/>
+		<img src="images/cvet.png" alt="cvet2" class="cvet desno"/>
+		<br>
+		
+		<div id="osoba1"></div>
+        <div id="osoba2"></div>
+		</div>
+	
+      </div>
+    </div>
+
+	
+	
+	
+	
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="js/jquery.sooperfish.js"></script>
+  <script type="text/javascript" src="js/image_fade.js"></script>
+    <script type="text/javascript" src="js/funkcionalnost.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('ul.sf-menu').sooperfish();
+    });
+  </script>
+</body>
+</html>
