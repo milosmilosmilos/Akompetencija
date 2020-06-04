@@ -1,0 +1,58 @@
+using System;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+
+namespace WebApplication2
+{
+    public partial class Recnik : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        { 
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+
+            if (DropDownList1.SelectedIndex == 0)
+            {
+                string select = "Select Srpski, Opis From RecnikTbl Where Engleski=@Engleski";
+                SqlCommand cmd = new SqlCommand(select, con);
+                cmd.Parameters.AddWithValue("Engleski", TextBox1.Text);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    TextBox2.Text = reader.GetString(0);
+                    TextBox3.Text = reader["Opis"].ToString();
+                }
+                con.Close();
+            }
+            else if (DropDownList1.SelectedIndex == 1)
+            {
+                string select = "Select Engleski, Opis From RecnikTbl Where Srpski=@Srpski";
+                SqlCommand cmd = new SqlCommand(select, con);
+                cmd.Parameters.AddWithValue("Srpski", TextBox1.Text);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    TextBox2.Text = reader.GetString(0);
+                    TextBox3.Text = reader["Opis"].ToString();
+                }
+                con.Close();
+            }
+        }
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Unos.aspx");
+        }
+    }
+}
