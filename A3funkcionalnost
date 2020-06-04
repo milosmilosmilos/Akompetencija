@@ -1,0 +1,5 @@
+function promeni()
+{
+	var pom = document.getElementById("gradovi");
+	document.getElementById("ifrm").src = "https://naslovi.net/vremenska-prognoza/" + pom.value;
+}
