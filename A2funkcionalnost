@@ -1,0 +1,15 @@
+function promeni(Id){
+	var pom = document.getElementsByClassName('centralna')[0].id;
+	var temp;
+	var x;
+	if(document.getElementById(Id).className=='ostale')
+	{
+		document.getElementById('tekst').innerHTML = document.getElementById(Id).alt;
+		temp = document.getElementById(Id).src;
+		x = document.getElementById(Id).alt;
+		document.getElementById(Id).src = document.getElementById(pom).src;
+		document.getElementById(pom).src = temp;
+		document.getElementById(Id).alt = document.getElementById(pom).alt;
+		document.getElementById(pom).alt = x;
+	}
+}
