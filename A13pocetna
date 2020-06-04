@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.IO; // dodato zbog Stream
+
+namespace CD_katalog
+{
+    public partial class Katalog : System.Web.UI.Page
+    {
+        List<Album> listaAlbuma = new List<Album>();
+        List<string> godine = new List<string>();
+        Album novi;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            int indeks, indeks1;
+            StreamReader sr = new StreamReader(MapPath(@"~\Podaci\katalog.txt"), true);
+            string pom = sr.ReadLine();
+            while (pom != null)
+            {
+                novi = new Album();
+                indeks = pom.IndexOf("|");
+                novi.Izvodjac = pom.Substring(0, indeks-1).Trim();
+                indeks1 = pom.IndexOf("|", indeks+1);
+                novi.Naziv = pom.Substring(indeks+1, indeks1-indeks-1).Trim();
+                indeks = indeks1;
+                indeks1 = pom.IndexOf("|", indeks + 1);
+                novi.Zanr = pom.Substring(indeks+1, indeks1 - indeks-1).Trim();
+                indeks = indeks1;
+                indeks1 = pom.IndexOf("|", indeks + 1);
+                novi.Godina = pom.Substring(indeks+1, indeks1 - indeks-1).Trim();
+                indeks = indeks1;
+                indeks1 = pom.IndexOf("|", indeks + 1);
+                novi.Izdavac = pom.Substring(indeks + 1, indeks1 - indeks - 1).Trim();
+                indeks1 = pom.LastIndexOf("|"); 
+                novi.Omot = pom.Substring(indeks1+1).Trim();
+                listaAlbuma.Add(novi);
+                pom = sr.ReadLine();
+            }
+
+            if (!IsPostBack)
+            {
+                foreach (Album a in listaAlbuma)
+                {
+                    godine.Add(a.Godina);
+                }
+                ddlGodina.Items.Add("Izaberi");
+            
+                foreach (string god in godine.Distinct())
+                {
+                    ddlGodina.Items.Add(god);
+                }
+            }
+        }
+
+        private void resetuj()
+        {
+            tbIzvodjac.Text = "";
+            tbNaziv.Text = "";
+            ddlZanr.SelectedIndex = 0;
+            ddlGodina.SelectedIndex = 0;
+            tbIzdavac.Text = "";
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string s,s1;
+            if (ddlGodina.SelectedIndex == 0) s = ""; else s = ddlGodina.SelectedValue.ToString();
+            if (ddlZanr.SelectedIndex == 0) s1 = ""; else s1 = ddlZanr.SelectedValue.ToString();
+            PlaceHolder1.Controls.Add(new LiteralControl("<table id='albumi'>"));
+            PlaceHolder1.Controls.Add(new LiteralControl("<tr><th>Omot</th><th>Izvodjac</th><th>Naziv</th><th>Zanr</th><th>Godina</th><th>Izdavac</th></tr>"));
+            foreach (Album a in listaAlbuma)
+            {
+                if (a.Izvodjac.Contains(tbIzvodjac.Text) && a.Naziv.Contains(tbNaziv.Text) && a.Zanr.Contains(s1) && a.Godina.Contains(s) && a.Izdavac.Contains(tbIzdavac.Text))
+                {
+                    PlaceHolder1.Controls.Add(new LiteralControl(string.Format("<tr><td><img src='{0}' style='height:100px; width:100px;'/></td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>", a.Omot, a.Izvodjac, a.Naziv, a.Zanr, a.Godina, a.Izdavac)));
+                }
+            }
+            PlaceHolder1.Controls.Add(new LiteralControl("</table>"));
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Uputstvo.aspx");
+        }
+    }
+}
