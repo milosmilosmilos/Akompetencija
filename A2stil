@@ -1,0 +1,31 @@
+.kontejnergalerije{
+margin-left:50px;
+width: 640px;
+height: 480px;
+border:3px dotted red;
+
+}
+
+div.cntr{
+margin-top: 40px;
+}
+
+.centralna{
+width: 320px;
+height: 200px;
+display:block;
+margin:auto;
+}
+
+.ostale{
+width: 64px;
+height: 40px;
+}
+
+.prelazmisa img:hover {
+  border: 2px solid red;
+}
+#tekst{
+	  background-color: lightgrey;
+  color: blue;
+}
