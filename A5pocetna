@@ -1,0 +1,124 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.Configuration;
+using System.Data.SqlClient;
+using System.Collections;
+using System.Data.OleDb;
+
+namespace A5_Rezervacija_Karata
+{
+    public partial class Pocetna : System.Web.UI.Page
+    {
+      List<Button> dugmad = new List<Button>();
+        List<int> zauzeto = new List<int>();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+         
+                string upit = "SELECT BrojSedista FROM RezervacijeTbl";
+                string connectionString = WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                SqlConnection con = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(upit, con);
+                con.Open();
+                SqlDataReader reader;
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    zauzeto.Add(Convert.ToInt32(reader.GetValue(0)));
+                }
+                List<Button> dugmad = new List<Button>();
+                Button proba = new Button();
+                dugmad.Add(proba);//ovo dodajem samo da mogu da krenem dole sa crtanjem od prvog a ne od nultog!!
+                dugmad[0] = null;
+            dugmad.Add(proba);
+            dugmad[1] = null;
+            for (int i = 2; i <= 52; i++)
+                {
+
+                    Button btn = new Button();
+                    dugmad.Add(btn);
+                    dugmad[i].Text = i.ToString();
+                    dugmad[i].ID = i.ToString();
+                    dugmad[i].Font.Bold = true;
+                    dugmad[i].ForeColor = System.Drawing.Color.Black; ;
+
+                    dugmad[i].Font.Size = 10;
+                    dugmad[i].Width = Unit.Pixel(50);
+                dugmad[i].CssClass = "button";
+                    PlaceHolder1.Controls.Add(dugmad[i]);
+                    if ((i-1) % 13 == 0)
+                        PlaceHolder1.Controls.Add(new LiteralControl("<br>"));
+                    PlaceHolder1.Visible = true;
+                    dugmad[i].Click += new EventHandler(btn_Click);
+
+                }
+
+                for (int i = 2; i <= 52; i++)
+                {
+                    if (zauzeto.Contains(i))
+                    {
+                        dugmad[i].BackColor = System.Drawing.Color.Red;
+                    dugmad[i].Enabled = false;
+                    }
+                    else if (!zauzeto.Contains(i))
+                        dugmad[i].BackColor = System.Drawing.Color.LightGreen;
+
+
+                }
+            }
+        
+        void oboji()
+        {
+            
+        }
+        void btn_Click(object sender, EventArgs e)
+        {
+            string broj = (sender as Button).Text;
+            TextBox1.Text = broj;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "")
+            {
+                string connectionString = WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                SqlConnection con = new SqlConnection(connectionString);
+                string upisi = "Insert Into RezervacijeTbl (BrojSedista, Ime, Prezime) Values (@BrojSedista, @Ime, @Prezime)";
+                SqlCommand cmd = new SqlCommand(upisi, con);
+                cmd.Parameters.AddWithValue("BrojSedista", Convert.ToInt32(TextBox1.Text));
+                cmd.Parameters.AddWithValue("Ime", TextBox2.Text);
+                cmd.Parameters.AddWithValue("Prezime", TextBox3.Text);
+                con.Open();
+                try
+                {
+                    if (Convert.ToInt32(cmd.ExecuteNonQuery()) == 1)
+                    {
+                         TextBox1.Text = "";
+                        TextBox2.Text = "";
+                        TextBox3.Text = "";
+                        Response.Redirect(Request.RawUrl);
+                    }
+                }
+                catch { }
+                finally
+                {
+                    con.Close();
+                }
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Uputstvo.aspx");
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/O autoru.aspx");
+        }
+    }
+}
