@@ -1,0 +1,40 @@
+function izracunaj(){
+	var v1, v2, proc, i;
+	var s1=0;
+	var s2=0;
+	var p;
+	v1 = document.getElementById('datum1').value;
+	v2 = document.getElementById('datum2').value;
+	 var imeOsobe1 = document.getElementById('ime1').value;
+    var imeOsobe2 = document.getElementById('ime2').value;
+	do
+	{
+		s1=0;
+		for(i=0; i<v1.length; i++)
+		{
+			if(v1[i] != '-')
+				s1=s1 + +v1[i];
+		}
+		v1=s1.toString();
+	}while(s1>9);
+		
+	do
+	{
+		s2=0;
+		for(i=0; i<v2.length; i++)
+		{
+			if(v2[i] != '-')
+				s2=s2 + +v2[i];
+		}
+		v2=s2.toString();
+	}while(s2>9);
+
+	if(s1 < s2)
+		p=(s1 / s2) * 100;
+	else
+		p=(s2 / s1) * 100;
+	p=Math.round(p);
+	document.getElementById('procenat').innerHTML = p+'%';
+	document.getElementById('osoba1').innerHTML = imeOsobe1;
+    document.getElementById('osoba2').innerHTML = imeOsobe2;
+}
