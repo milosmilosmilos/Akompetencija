@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace TelefonskiImenik
+{
+    public class Imenik
+    {
+        private string id;
+        private string ime;
+        private string prezime;
+        private string adresa;
+        private string mesto;
+        private string broj;
+        private string mail;
+        public string Id { get { return id; } set { id = value; } }
+        public string Ime { get { return ime; } set { ime = value; } }
+        public string Prezime { get { return prezime; } set { prezime = value; } }
+        public string Adresa { get { return adresa; } set { adresa = value; } }
+        public string Mesto { get { return mesto; } set { mesto= value; } }
+        public string Broj { get { return broj; } set { broj = value; } }
+        public string Mail { get { return mail; } set { mail = value; } }
+
+        public Imenik(string id,string ime,string prezime,string adresa,string mesto,string broj,string mail)
+        {
+            this.id = id;
+            this.ime = ime;
+            this.prezime = prezime;
+            this.adresa = adresa;
+            this.mesto = mesto;
+            this.broj = broj;
+            this.mail = mail;
+        }
+    }
+}
