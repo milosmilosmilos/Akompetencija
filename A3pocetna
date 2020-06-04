@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="stil.css">
+</head>
+
+<body>
+<a href="O autoru.html" target="_top">O autoru</a></p>
+<a href="Uputstvo.html" target="_top">Uputstvo</a></p>
+<form id="forma" action="JavaScript:promeni()">
+  <label for="cars">Izaberite zeljeni grad: </label>
+  <select id="gradovi" name="gradovi">
+    <option value="beograd">Beograd</option>
+    <option value="nis">Nis</option>
+    <option value="novi-sad">Novi Sad</option>
+    <option value="kragujevac">Kragujevac</option>
+	<option value="leskovac">Leskovac</option>
+	<option value="subotica">Subotica</option>
+	<option value="cacak">Cacak</option>
+	<option value="novi-pazar">Novi Pazar</option>
+	<option value="valjevo">Valjevo</option>
+	<option value="krusevac">Krusevac</option>
+  </select>
+  <input type="submit" class="dugme" value="Izaberi">
+</form>
+<br/><br/>
+<iframe id="ifrm" src="https://naslovi.net/vremenska-prognoza/beograd" height="700" width="700" ></iframe>
+
+<script src="funkcionalnost.js">
+</script>
+
+</body>
+</html>
